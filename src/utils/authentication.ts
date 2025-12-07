@@ -1,4 +1,4 @@
-import type { LoginCredentials } from "../types/login/loginCredentials";
+import type { LoginCredentials } from "../types/login/login-credentials";
 import type { User } from "../types/login/user";
 
 const AUTH_STORAGE_KEY = 'auth_user';

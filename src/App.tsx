@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from './pages/login'
-import PageNotFound from './pages/PageNotFound'
-import WithAuth from './routes/WithAuthentication'
+import PageNotFound from './pages/page-not-found'
+import WithAuth from './routes/with-authentication'
 function App() {
   return (
     <Routes>

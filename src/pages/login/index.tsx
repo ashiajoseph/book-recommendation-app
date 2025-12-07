@@ -9,7 +9,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
-import type { LoginCredentials } from '../../types/login/loginCredentials';
+import type { LoginCredentials } from '../../types/login/login-credentials';
 import { authenticateUser } from '../../utils/authentication';
 import { useNavigate } from "react-router-dom";
 
@@ -46,10 +46,12 @@ const Login = () => {
     };
 
     const isValidUser: boolean = authenticateUser(credentials);
+    console.log(isValidUser)
     if (!isValidUser) {
       setError(true);
       setUsername('');
       setPassword('');
+      return;
     }
 
     navigate('/books');
