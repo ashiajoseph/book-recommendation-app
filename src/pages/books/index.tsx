@@ -27,20 +27,18 @@ import { useAppDispatch, useAppSelector, useDebounce } from '../../hooks';
 import { getSearchKey, update } from '../../store/search-key-slice';
 
 const BookList = () => {
-  const [error, setError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const prevSearchKeyword = useAppSelector(getSearchKey);
   const dispatch = useAppDispatch();
+  const gridRef = useRef<AgGridReact<Book>>(null);
+  const navigate: NavigateFunction = useNavigate();
 
   // Get existing review from Redux
-  const prevSearchKeyword = useAppSelector(getSearchKey);
   const [searchQuery, setSearchQuery] = useState<string>(prevSearchKeyword);
   const debouncedSearchQuery = useDebounce(searchQuery);
-
-  const gridRef = useRef<AgGridReact<Book>>(null);
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchType, setSearchType] = useState<string>("intitle:");
 
-  const booksPerPage: number = 20;
-  const navigate: NavigateFunction = useNavigate();
   const columnDefs: ColDef<Book>[] = useMemo(
     () => [
       {
@@ -88,7 +86,8 @@ const BookList = () => {
     []
   );
 
-   const datasource: IDatasource = useMemo(
+  const booksPerPage: number = 20;
+  const datasource: IDatasource = useMemo(
     () => ({
       rowCount: undefined,
 
@@ -121,12 +120,11 @@ const BookList = () => {
     [debouncedSearchQuery, booksPerPage, searchType]
   );
 
-
-  const onCellDoubleClicked = (event: CellDoubleClickedEvent<Book>) => {
-      if (event.data) {
-        navigate(`/books/${event.data.id}`);
-      }
+  const onGridReady = useCallback(() => {
+    if (gridRef.current?.api) {
+      gridRef.current.api.setGridOption('datasource', datasource);
     }
+  }, [datasource]);
 
   const handleSearch = (value: string) => {
     setIsLoading(true);
@@ -134,11 +132,11 @@ const BookList = () => {
     dispatch(update(value));
   };
 
-  const onGridReady = useCallback(() => {
-    if (gridRef.current?.api) {
-      gridRef.current.api.setGridOption('datasource', datasource);
+  const onCellDoubleClicked = (event: CellDoubleClickedEvent<Book>) => {
+      if (event.data) {
+        navigate(`/books/${event.data.id}`);
+      }
     }
-  }, [datasource]);
 
 return (
   <Box sx={{ display: 'flex', flexDirection: 'column'  }}>

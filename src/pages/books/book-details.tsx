@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -56,14 +56,6 @@ const BookDetails = () => {
     queryFn: () => getBookById(bookId!),
     enabled: !!bookId, // Only run if bookId exists
   });
-
-  useEffect(() => {
-    if (existingReview) {
-      setRating(existingReview.rating);
-      setReviewText(existingReview.reviewText);
-    }
-  }, []);
-
 
   const handleDialogOpen = () => {
     setOpenDialog(true);
