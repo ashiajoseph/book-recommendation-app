@@ -46,7 +46,6 @@ const Login = () => {
     };
 
     const isValidUser: boolean = authenticateUser(credentials);
-    console.log(isValidUser)
     if (!isValidUser) {
       setError(true);
       setUsername('');
@@ -59,7 +58,7 @@ const Login = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
        <Paper
           elevation={3}
           sx={{

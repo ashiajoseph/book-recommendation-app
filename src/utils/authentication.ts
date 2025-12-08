@@ -40,3 +40,7 @@ export const authenticateUser = (credentials: LoginCredentials): boolean => {
   localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
   return true
 }
+
+export const logout = (): void => {
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+}
