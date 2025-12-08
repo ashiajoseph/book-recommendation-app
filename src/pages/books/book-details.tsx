@@ -128,12 +128,16 @@ const BookDetails = () => {
     <Box>
       <Header  showBackButton />
       {saveSuccess && (
-        <Snackbar open={saveSuccess} autoHideDuration={1500} onClose={handleSnackbarClose}>
-        <Alert
-          severity="success"
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
+        <Snackbar
+          open={saveSuccess}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          autoHideDuration={1500}
+          onClose={handleSnackbarClose}>
+          <Alert
+            severity="success"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
            Review saved successfully!
         </Alert>
       </Snackbar>
