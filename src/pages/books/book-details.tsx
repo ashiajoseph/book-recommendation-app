@@ -194,7 +194,7 @@ const BookDetails = () => {
             <CardContent>
               <SingleTypography property='Published On' value={book.publishedDate?.split('T')[0]} />
               <SingleTypography property={'Publisher'} value={book.publisher} />
-              <SingleTypography property={'Pages'} value={String(book.pageCount)} />
+              { book.pageCount && <SingleTypography property={'Pages'} value={String(book.pageCount)} />}
               { book.averageRating && <SingleTypography property={"Average Rating ⭐"} value={String(book.averageRating)}/> }
             </CardContent>
           </Card>
@@ -207,7 +207,7 @@ const BookDetails = () => {
                 {book.title}
               </Typography>
               <Typography variant="body2" p={1}color="text.secondary" textAlign="center" gutterBottom>
-                <i>by</i> {book.authors?.join(", ")}
+                <i>by</i> {book.authors?.join(', ') || 'Unknown Author'}
               </Typography>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                 { book.categories?.map((category) => (
