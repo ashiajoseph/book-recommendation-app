@@ -7,6 +7,8 @@ import {
   Paper,
   FormControlLabel,
   Checkbox,
+  Alert,
+  Snackbar,
 } from '@mui/material';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import type { LoginCredentials } from '../../types/login/login-credentials';
@@ -72,9 +74,6 @@ const Login = () => {
           <Typography component="h2" variant="h5" sx={{mb: 6}}>
             Login
           </Typography>
-          { error && <Typography variant="body2" color="error" gutterBottom>
-            Please enter a valid username and password
-          </Typography>}
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
               margin="normal"
@@ -89,6 +88,7 @@ const Login = () => {
               onChange={handleUsernameChange}
               placeholder="Enter your username"
               error={error}
+              helperText={error ? 'Invalid username' : ''}
             />
 
             <TextField
@@ -104,6 +104,7 @@ const Login = () => {
               onChange={handlePasswordChange}
               placeholder="Enter your password"
               error={error}
+              helperText={error ? 'Invalid password' : ''}
             />
 
             <FormControlLabel
@@ -125,6 +126,15 @@ const Login = () => {
             >
               Submit
             </Button>
+            <Snackbar open={error} anchorOrigin={{ vertical: "top", horizontal: "right" }} >
+              <Alert
+                severity="error"
+                variant="filled"
+                sx={{ width: '100%' }}
+              >
+                  Invalid credentials. Please try again.
+              </Alert>
+            </Snackbar>
           </Box>
         </Paper>
       </Box>
