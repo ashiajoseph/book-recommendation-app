@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { useNavigate, type NavigateFunction } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
-import type { ColDef, CellDoubleClickedEvent, ValueGetterParams, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import type { ColDef, CellDoubleClickedEvent, ValueGetterParams, IDatasource, IGetRowsParams, ITooltipParams } from 'ag-grid-community';
 import {
   Container,
   Box,
@@ -51,6 +51,7 @@ const BookList = () => {
         flex: 1.2,
         headerTooltip: "The title of the book",
         sortable: false,
+        tooltipField: 'title',
       },
       {
         headerName: 'Authors',
@@ -63,6 +64,7 @@ const BookList = () => {
         headerTooltip: "The authors of the book",
         wrapText: true,
         sortable: false,
+        tooltipValueGetter: (p: ITooltipParams) => p.value
       },
       {
         headerName: 'Genre',
@@ -75,6 +77,7 @@ const BookList = () => {
         flex : 0.5,
         headerTooltip: "The genre of the book",
         sortable: false,
+        tooltipValueGetter: (p: ITooltipParams) => p.value
       },
       {
         headerName: 'Average Rating',
