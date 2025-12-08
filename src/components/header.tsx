@@ -8,6 +8,8 @@ import {
 import { ArrowBack, Logout as LogoutIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../utils/authentication';
+import { useAppDispatch } from '../hooks';
+import { update } from '../store/search-key-slice';
 
 interface HeaderProps {
   title?: string;
@@ -16,11 +18,13 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({title, showBackButton}) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
+  function handleLogout() {
+    dispatch(update(''));
     logout();
     navigate('/login');
-  };
+  }
 
  return (
   <AppBar position="static" enableColorOnDark>

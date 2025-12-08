@@ -27,7 +27,7 @@ import { useAppDispatch, useAppSelector, useDebounce } from '../../hooks';
 import { getSearchKey, update } from '../../store/search-key-slice';
 
 const BookList = () => {
-  const prevSearchKeyword = useAppSelector(getSearchKey);
+  const prevSearchKeyword: string = useAppSelector(getSearchKey);
   const dispatch = useAppDispatch();
   const gridRef = useRef<AgGridReact<Book>>(null);
   const navigate: NavigateFunction = useNavigate();
