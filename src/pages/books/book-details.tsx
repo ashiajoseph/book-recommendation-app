@@ -46,6 +46,8 @@ const BookDetails = () => {
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const maximumReviewLength: number = 400;
+
   const {
     data: book,
     isLoading,
@@ -236,18 +238,19 @@ const BookDetails = () => {
               <Box mb={1}>
                 <TextField
                   fullWidth
+                  error={reviewText.length > maximumReviewLength}
                   multiline
-                  rows={6}
-                  placeholder="Share your thoughts about this book..."
+                  rows={5}
+                  placeholder={`Share your thoughts about this book... (maximum ${maximumReviewLength} characters)`}
                   value={reviewText}
                   onChange={(e) => handleReviewTextChange(e.target.value)}
                   variant="outlined"
-                  helperText={`${reviewText.length} ${reviewText.length <2 ? 'character' : 'characters' }`}
+                  helperText={`${reviewText.length} ${reviewText.length <2 ?
+                     'character' : 'characters' } ${reviewText.length > maximumReviewLength ? `(Exceeds maximum limit of ${maximumReviewLength} characters)` : ''}`}
                 />
               </Box>
 
               <Box sx={{ display: 'flex', justifyContent: "end",  gap: 2 }}>
-
                 {existingReview && (
                   <Button
                     variant="outlined"
@@ -262,7 +265,9 @@ const BookDetails = () => {
                   variant="contained"
                   startIcon={<Save />}
                   onClick={handleSaveReview}
-                  disabled={rating === 0 && reviewText.trim().length === 0}
+                  disabled={rating === 0 &&
+                    (reviewText.trim().length === 0 ||
+                    reviewText.trim().length > maximumReviewLength)}
                   title={existingReview ? 'Update Review' : 'Save Review'}
                 >
                   {existingReview ? 'Update' : 'Save'}
