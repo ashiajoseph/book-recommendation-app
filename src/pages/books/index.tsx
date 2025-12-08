@@ -15,6 +15,7 @@ import {
   RadioGroup,
   FormControlLabel,
   IconButton,
+  Button,
 } from '@mui/material';
 import { Search as SearchIcon, Close as CloseIcon } from '@mui/icons-material';
 import { getBooks } from '../../services/books-service';
@@ -92,7 +93,6 @@ const BookList = () => {
       rowCount: undefined,
 
       getRows: async (params: IGetRowsParams) => {
-        setIsLoading(true);
         setError('');
         try {
           const startIndex = params.startRow || 0;
@@ -103,10 +103,15 @@ const BookList = () => {
             maxResults: booksPerPage,
           });
 
+          let lastRow = -1;
+          if (totalItems <= params.endRow) {
+            lastRow = params.startRow + (items?.length ?? 0);
+          }
+
           setIsLoading(false);
 
           // Tell AG Grid fetch is successful with data.
-          params.successCallback(items ?? [], totalItems);
+          params.successCallback(items ?? [], lastRow);
 
         } catch (err) {
           console.error('Error loading books:', err);
@@ -137,6 +142,14 @@ const BookList = () => {
         navigate(`/books/${event.data.id}`);
       }
     }
+
+  const refreshGrid = () => {
+    if (gridRef.current) {
+        gridRef.current.api.setGridOption('datasource', datasource);
+        setError('');
+        setIsLoading(true);
+    }
+  };
 
 return (
   <Box sx={{ display: 'flex', flexDirection: 'column'  }}>
@@ -187,7 +200,11 @@ sx={{ display: 'flex', gap: 1, m: 1 }}>
           </RadioGroup>
       </Paper>
       {error && (
-        <Alert severity="error" onClose={() => setError('')}>
+        <Alert severity="error" onClose={() => setError('')} action={
+            <Button color="inherit" size="small" onClick={refreshGrid}>
+                Retry
+            </Button>
+        }>
           {error}
         </Alert>
       )}
