@@ -59,7 +59,7 @@ const BookList = () => {
           if (params?.data?.authors == undefined) return "";
           return params.data?.authors ? params.data.authors.join(', ') : 'Unknown';
         },
-        cellStyle: { textAlign: 'left'},
+        cellStyle: { textAlign: 'left', fontWeight: 'normal'},
         flex : 0.8,
         headerTooltip: "The authors of the book",
         wrapText: true,
@@ -71,7 +71,7 @@ const BookList = () => {
           if (params?.data?.categories == undefined) return "";
           return params.data?.categories ? params.data.categories.join(', ') : 'Unknown';
         },
-        cellStyle: { textAlign: 'left' },
+        cellStyle: { textAlign: 'left', fontWeight: 'normal' },
         wrapText: true,
         flex : 0.5,
         headerTooltip: "The genre of the book",
@@ -217,12 +217,12 @@ sx={{ display: 'flex', gap: 1, m: 1 }}>
             columnDefs={columnDefs}
             onCellDoubleClicked={onCellDoubleClicked}
 
-            rowModelType="infinite"
+            rowModelType={"infinite"}
             datasource={datasource}
             cacheBlockSize={booksPerPage}
-            cacheOverflowSize={3}
+            cacheOverflowSize={10}
             maxConcurrentDatasourceRequests={1}
-            infiniteInitialRowCount={10}
+            infiniteInitialRowCount={3}
             onGridReady={onGridReady}
             rowHeight={40}
             headerHeight={50}
