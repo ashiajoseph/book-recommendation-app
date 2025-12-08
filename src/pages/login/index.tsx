@@ -58,7 +58,7 @@ const Login = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
        <Paper
           elevation={3}
           sx={{
