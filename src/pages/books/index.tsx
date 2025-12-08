@@ -51,6 +51,7 @@ const BookList = () => {
         wrapText: true,
         flex: 1.2,
         headerTooltip: "The title of the book",
+        sortable: false,
       },
       {
         headerName: 'Authors',
@@ -62,6 +63,7 @@ const BookList = () => {
         flex : 0.8,
         headerTooltip: "The authors of the book",
         wrapText: true,
+        sortable: false,
       },
       {
         headerName: 'Genre',
@@ -73,13 +75,14 @@ const BookList = () => {
         wrapText: true,
         flex : 0.5,
         headerTooltip: "The genre of the book",
+        sortable: false,
       },
       {
         headerName: 'Average Rating',
         field: 'averageRating',
         width: 140,
         headerTooltip: "The average rating of the book",
-
+        sortable: false,
       },
     ],
     []
