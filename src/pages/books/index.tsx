@@ -125,7 +125,7 @@ const BookList = () => {
         }
       },
     }),
-    [debouncedSearchQuery, booksPerPage, searchType]
+    [debouncedSearchQuery, searchType]
   );
 
   const onGridReady = useCallback(() => {
