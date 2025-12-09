@@ -269,9 +269,7 @@ const BookDetails = () => {
                   variant="contained"
                   startIcon={<Save />}
                   onClick={handleSaveReview}
-                  disabled={rating === 0 &&
-                    (reviewText.trim().length === 0 ||
-                    reviewText.trim().length > maximumReviewLength)}
+                  disabled={(rating === 0 || reviewText.length === 0) || ( reviewText.length > 0 && reviewText.trim().length > maximumReviewLength)}
                   title={existingReview ? 'Update Review' : 'Save Review'}
                 >
                   {existingReview ? 'Update' : 'Save'}

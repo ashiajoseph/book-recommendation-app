@@ -15,3 +15,7 @@
 .ag-header-cell{
     font-weight: 700;
 }
+
+.ag-cell {
+    cursor: pointer;
+}
